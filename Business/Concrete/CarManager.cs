@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -18,9 +20,42 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        public void Add(EfCarDal efCarDal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Car car)
+        {
+            if (car.Description.Length < 2)
+            {
+                Console.WriteLine(Messages.carNameInvalid);
+            }
+            else if (car.DailyPrice < 0)
+            {
+                Console.WriteLine(Messages.carPriceInvalid);
+            }
+            else
+            {
+                // araç eklenebilir
+                _carDal.Add(car);
+                Console.WriteLine(Messages.carAdded);
+            }
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
+        }
+
+        public List<Car> GetCarsByBrandId(int brandId)
+        {
+            return _carDal.GetAll(c => c.BrandId == brandId);
+        }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
     }
 }
