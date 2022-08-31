@@ -1,9 +1,9 @@
-using Entities.Abstract;
+using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 {
     // Burada T yi kısıtlamak istiyoruz
     // Bu sayede sadece bizim Db deki tablo class larımızı verileceğiz
@@ -17,7 +17,7 @@ namespace DataAccess.Abstract
     // class olamalı,
     // IEntity olabilir veya IEntity den implemente bir nesne olabilir,
     // new'lenebilir olmalı yani interface olmamalı
-    public interface IEntityRepository<T> where T: class, IEntity, new()
+    public interface IEntityRepository<T> where T : class, IEntity, new()
     {
         // bu ifade ile DB deki tüm veriler gertirilebileceği gibi
         // kullanıcının filtrelerine göre veya kısım kısım verileri getirebiliriz

@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntitiyFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, CarRentalContext>, ICarDal
     {
         public void Add(Car entity)
         {
@@ -17,7 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
             // using nesnesi ile yazdığımız kodlar using bitince anında çöp toplayıcısı gelir ve beni bellekten at der.
             // Çünkü Context nesnesi biraz belleği yoran pahalı bir nesnedir. Burada kullanılan using'e;
             // IDispossable pattern implementation of C# denir.
-            using (ReCapContext context=new ReCapContext())
+            using (CarRentalContext context=new CarRentalContext())
             {
                 // referansı yakalıyoruz
                 var addedEntity = context.Entry(entity);
@@ -30,7 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Car entity)
         {
-            using (ReCapContext context = new ReCapContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var deletedEntity = context.Entry(entity);
                 // yakalanan referans silinecek nesne olarak belirtiyoruz
@@ -41,7 +43,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Car entity)
         {
-            using (ReCapContext context=new ReCapContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var updatedEntity = context.Entry(entity);
                 // yakalanan referans update edilecek nesne olarak belirtiyoruz
@@ -52,7 +54,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Car Get(Expression<Func<Car, bool>> filter)
         {
-            using (ReCapContext context=new ReCapContext())
+            using (CarRentalContext context=new CarRentalContext())
             {
                 // bu satır aslında filter'a göre Tek satırlık Product nesnesi döndürecek
                 return context.Set<Car>().SingleOrDefault(filter);
@@ -61,11 +63,32 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            using (ReCapContext context=new ReCapContext())
+            using (CarRentalContext context=new CarRentalContext())
             {
                 return filter == null
                     ? context.Set<Car>().ToList()                   // filter null ise burası çalışır 
                     : context.Set<Car>().Where(filter).ToList();    // filter var ise burası çalışır
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailDtos()
+        {
+            using (CarRentalContext context=new CarRentalContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join co in context.Colors
+                             on c.ColorId equals co.ColorId
+                             select new CarDetailDto
+                             {
+                                 CarId = c.Id,
+                                 CarName = c.CarName,
+                                 BrandName = b.BrandName,
+                                 ColorName = co.ColorName,
+                                 DailyPrice = c.DailyPrice
+                             };
+                return result.ToList();
             }
         }
     }

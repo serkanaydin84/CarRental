@@ -7,11 +7,11 @@ using System.Text;
 namespace DataAccess.Concrete.EntityFramework
 {
     // Context: DB tabloları ile proje classlarını bağlamak
-    public class ReCapContext : DbContext
+    public class CarRentalContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ReCap;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CarRental;Trusted_Connection=true");
         }
 
         // DB deki tablolarla Entities deki class larımızı bağlıyoruz
