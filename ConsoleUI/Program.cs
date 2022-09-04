@@ -11,7 +11,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            // CarDetailsTest();
+             CarDetailsTest();
             // CarAddTest();
             // CarUpdateTest();
             // CarDeleteTest();
@@ -58,10 +58,19 @@ namespace ConsoleUI
         private static void ColorGetAllTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            var result = colorManager.GetAll();
+            if (result.Success)
             {
-                Console.WriteLine(color.ColorName);
+                foreach (var color in result.Data)
+                {
+                    Console.WriteLine(color.ColorName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
         private static void BrandDeleteTest()
@@ -95,9 +104,17 @@ namespace ConsoleUI
         private static void BrandGetAllTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            var result = brandManager.GetAll();
+            if (result.Success)
             {
-                Console.WriteLine(brand.BrandName);
+                foreach (var brand in result.Data)
+                {
+                    Console.WriteLine(brand.BrandName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
 
@@ -128,10 +145,19 @@ namespace ConsoleUI
         private static void CarDetailsTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine("{0} --- {1} --- {2} --- {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("{0} --- {1} --- {2} --- {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
         private static void CarAddTest()

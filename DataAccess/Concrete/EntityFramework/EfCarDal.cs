@@ -21,12 +21,10 @@ namespace DataAccess.Concrete.EntityFramework
             // IDispossable pattern implementation of C# denir.
             using (CarRentalContext context=new CarRentalContext())
             {
-                // referansı yakalıyoruz
-                var addedEntity = context.Entry(entity);
-                // yakalanan referans aslında eklenecek bir nesne onu belirtiyoruz
-                addedEntity.State = EntityState.Added;
-                // burada da nesneyi ekliyoruz
-                context.SaveChanges();
+                
+                var addedEntity = context.Entry(entity);    // referansı yakalıyoruz       
+                addedEntity.State = EntityState.Added;  // yakalanan referans aslında eklenecek bir nesne onu belirtiyoruz
+                context.SaveChanges();  // burada da nesneyi ekliyoruz
             }
         }
 
