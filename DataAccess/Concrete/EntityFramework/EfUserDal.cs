@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(User entity)
         {
-            using (CarRentalContext context= new CarRentalContext)
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
