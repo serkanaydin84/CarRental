@@ -31,11 +31,11 @@ namespace WebAPI
         {
             services.AddControllers();
 
-            // bu kodun anlamý birisi arkaplanda ICarService isterse ona CarManager ver
-            services.AddSingleton<ICarService, CarManager>();
+            //// bu kodun anlamý birisi arkaplanda ICarService isterse ona CarManager ver
+            //services.AddSingleton<ICarService, CarManager>();
 
-            // bu kodun anlamý birisi arkaplanda ICarDal isterse ona EfCarDal ver
-            services.AddSingleton<ICarDal, EfCarDal>();
+            //// bu kodun anlamý birisi arkaplanda ICarDal isterse ona EfCarDal ver
+            //services.AddSingleton<ICarDal, EfCarDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

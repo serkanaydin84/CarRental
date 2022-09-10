@@ -8,6 +8,8 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -22,17 +24,10 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        //araç eklenme ile ilgili belirlediğimiz kuralları import ettik
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.Description.Length < 2)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
-            else if (car.DailyPrice < 0)
-            {
-                return new ErrorResult(Messages.CarPriceInvalid);
-            }
-            // araç eklenebilir
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
