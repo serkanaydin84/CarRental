@@ -121,7 +121,7 @@ namespace ConsoleUI
 
         private static void CarDeleteTest()
         {
-            CarManager carManager = new CarManager(new EfCarDal(), new ICarImageService());
+            CarManager carManager = new CarManager(new EfCarDal());
             carManager.Delete(new Car
             {
                 Id = 2003

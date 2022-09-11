@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Results;
@@ -41,7 +42,7 @@ namespace Business.Concrete
             carImages.Add(new CarImage{CarId = carId,ImagePath = "DefaultImage.jpg", Date = DateTime.Now});
             return new SuccessDataResult<List<CarImage>>(carImages);
         }
-
+        
         public IResult Add(IFormFile formFile, CarImage carImage)
         {
             //Bir araba için eklenecek resim sayısına sınır koyuyoruz
