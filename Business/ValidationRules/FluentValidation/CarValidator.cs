@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Entities.Concrete;
 using FluentValidation;
+using FluentValidation.Validators;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    class CarValidator:AbstractValidator<Car>
+    public class CarValidator:AbstractValidator<Car>
     {
         //kurallar buraya yazılır
         public CarValidator()

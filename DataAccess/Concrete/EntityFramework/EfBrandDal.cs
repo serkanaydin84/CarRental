@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         // IDispossable pattern implementation of C# denir.
         public void Add(Brand entity)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var addedBrand = context.Entry(entity);
                 addedBrand.State = EntityState.Added;
@@ -28,7 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Brand entity)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var deletedBrand = context.Entry(entity);
                 deletedBrand.State = EntityState.Deleted;
@@ -38,7 +38,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Brand entity)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var updatedBrand = context.Entry(entity);
                 updatedBrand.State = EntityState.Modified;
@@ -48,7 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 return context.Set<Brand>().SingleOrDefault(filter);
             }
@@ -56,7 +56,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            using (CarRentalContext context=new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 return filter == null
                     ? context.Set<Brand>().ToList()

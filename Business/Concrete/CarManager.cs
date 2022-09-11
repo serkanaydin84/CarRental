@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 
 namespace Business.Concrete
 {
@@ -28,6 +29,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
@@ -66,5 +68,15 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailDtos());
         }
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        // *******************************************************************************
+        //                          İŞ KURALLARI
+        // *******************************************************************************
+        //////////////////////////////////////////////////////////////////////////////////
+        /// 
+        /// 
+        
     }
 }

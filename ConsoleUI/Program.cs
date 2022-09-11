@@ -4,6 +4,7 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
+using Business.Abstract;
 
 namespace ConsoleUI
 {
@@ -120,7 +121,7 @@ namespace ConsoleUI
 
         private static void CarDeleteTest()
         {
-            CarManager carManager = new CarManager(new EfCarDal());
+            CarManager carManager = new CarManager(new EfCarDal(), new ICarImageService());
             carManager.Delete(new Car
             {
                 Id = 2003
